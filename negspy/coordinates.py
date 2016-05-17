@@ -2,16 +2,17 @@ import csv
 import os.path as op
 
 chromInfo = {}
-chromInfo['hg19'] = {}
 
-with open(op.join(op.dirname(__file__), 'data/chromInfo.txt'), 'r') as f:
-    reader = csv.reader(f, delimiter='\t')
-    totalLength = 0
+for assembly in ['hg19', 'hg38']:
+    chromInfo[assembly] = {}
+    with open(op.join(op.dirname(__file__), 'data/{}/chromInfo.txt'.format(assembly)), 'r') as f:
+        reader = csv.reader(f, delimiter='\t')
+        totalLength = 0
 
-    for rec in reader:
-        totalLength += int(rec[1])
+        for rec in reader:
+            totalLength += int(rec[1])
 
-        chromInfo['hg19'][rec[0]] = totalLength - int(rec[1])
+            chromInfo[assembly][rec[0]] = totalLength - int(rec[1])
 
 def chr_pos_to_genome_pos(chromosome, nucleotide, assembly='hg19'):
     '''

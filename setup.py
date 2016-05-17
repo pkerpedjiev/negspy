@@ -7,7 +7,7 @@ setup(name='forgi',
       author_email='pkerpedjiev@gmail.com',
       url='',
       packages=['negspy'],
-      package_data={'negspy': ['data/chromInfo.txt']},
+      package_data={'negspy': ['data/*/chromInfo.txt']},
       scripts=['scripts/chr_pos_to_genome_pos.py'],
 
      )
