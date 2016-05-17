@@ -8,6 +8,6 @@ setup(name='forgi',
       url='',
       packages=['negspy'],
       package_data={'negspy': ['data/chromInfo.txt']},
-      scripts=['scripts/chr_pos_to_genome.pos.py'],
+      scripts=['scripts/chr_pos_to_genome_pos.py'],
 
      )
