@@ -24,8 +24,8 @@ def main():
     parser.add_argument('-a', '--assembly', default='hg19')
 
 
-    #parser.add_argument('-o', '--options', default='yo',
-    #                     help="Some option", type='str')
+    parser.add_argument('-e', '--extra-columns', default='',
+                         help="Some option", type=str)
     #parser.add_argument('-u', '--useless', action='store_true', 
     #                     help='Another useless option')
     args = parser.parse_args()
@@ -33,9 +33,12 @@ def main():
     for line in sys.stdin:
         try:
             line_output = []
-            for chrom, pos in pairwise(line.strip().split()):
+            line_parts = line.strip().split()
+            for chrom, pos in pairwise(line_parts):
                 genome_pos = nc.chr_pos_to_genome_pos( chrom, int(pos), args.assembly)
                 line_output += [genome_pos]
+            for col in args.extra_columns.split(','):
+                line_output += [line_parts[int(col)]]
             print " ".join(map(str, line_output))
         except KeyError as ke:
             print >>sys.stderr, "KeyError:", ke, line.strip()
