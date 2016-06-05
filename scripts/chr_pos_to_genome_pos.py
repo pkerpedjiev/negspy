@@ -39,7 +39,7 @@ def main():
                 line_output += [genome_pos]
             for col in args.extra_columns.split(','):
                 line_output += [line_parts[int(col)]]
-            print " ".join(map(str, line_output))
+            print "\t".join(map(str, line_output))
         except KeyError as ke:
             print >>sys.stderr, "KeyError:", ke, line.strip()
     
