@@ -38,7 +38,7 @@ def main():
                 genome_pos = nc.chr_pos_to_genome_pos( chrom, int(pos), args.assembly)
                 line_output += [genome_pos]
             for col in args.extra_columns.split(','):
-                line_output += [line_parts[int(col)]]
+                line_output += [line_parts[int(col)-1]]
             print "\t".join(map(str, line_output))
         except KeyError as ke:
             print >>sys.stderr, "KeyError:", ke, line.strip()
