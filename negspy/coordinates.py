@@ -3,7 +3,7 @@ import os.path as op
 
 chromInfo = {}
 
-for assembly in ['hg19', 'hg38']:
+for assembly in ['hg19', 'hg38', 'mm9']:
     chromInfo[assembly] = {}
     with open(op.join(op.dirname(__file__), 'data/{}/chromInfo.txt'.format(assembly)), 'r') as f:
         reader = csv.reader(f, delimiter='\t')
