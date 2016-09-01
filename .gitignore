@@ -2,3 +2,5 @@
 *.un~
 *.pyc
 build/
+MANIFEST
+dist/
