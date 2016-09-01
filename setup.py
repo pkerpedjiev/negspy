@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-setup(name='forgi',
+setup(name='negspy',
       version='0.1',
       description='Python NGS tools',
       author='Peter Kerpedjiev',
