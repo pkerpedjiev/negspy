@@ -1,10 +1,16 @@
 import csv
 import os.path as op
 
+class ChromosomeInfo:
+    def __init__(self, name):
+        self.name = name
+        self.total_length = 0
+        self.cum_chrom_lengths = {}
+
 chromInfo = {}
 
 for assembly in ['hg19', 'hg38', 'mm9']:
-    chromInfo[assembly] = {}
+    chromInfo[assembly] = ChromosomeInfo(assembly)
     with open(op.join(op.dirname(__file__), 'data/{}/chromInfo.txt'.format(assembly)), 'r') as f:
         reader = csv.reader(f, delimiter='\t')
         totalLength = 0
@@ -12,7 +18,9 @@ for assembly in ['hg19', 'hg38', 'mm9']:
         for rec in reader:
             totalLength += int(rec[1])
 
-            chromInfo[assembly][rec[0]] = totalLength - int(rec[1])
+            chromInfo[assembly].cum_chrom_lengths[rec[0]] = totalLength - int(rec[1])
+
+        chromInfo[assembly].total_length = totalLength
 
 def chr_pos_to_genome_pos(chromosome, nucleotide, assembly='hg19'):
     '''
@@ -32,5 +40,5 @@ def chr_pos_to_genome_pos(chromosome, nucleotide, assembly='hg19'):
     if assembly not in chromInfo.keys():
         raise KeyError('No chromosome lengths for assembly {}'.format(assembly))
 
-    return chromInfo[assembly][chromosome] + nucleotide
+    return chromInfo[assembly].cum_chrom_lengths[chromosome] + nucleotide
 
