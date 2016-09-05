@@ -1,15 +1,16 @@
 #!/usr/bin/python
+from __future__ import print_function
 
 import negspy.coordinates as nc
 import sys
 import argparse
 
-from itertools import tee, izip
+from itertools import tee
 
 def pairwise(iterable):
     "s -> (s0, s1), (s2, s3), (s4, s5), ..."
     a = iter(iterable)
-    return izip(a, a)
+    return zip(a, a)
 
 def main():
     parser = argparse.ArgumentParser(description="""
@@ -39,9 +40,9 @@ def main():
                 line_output += [genome_pos]
             for col in args.extra_columns.split(','):
                 line_output += [line_parts[int(col)-1]]
-            print "\t".join(map(str, line_output))
+            print("\t".join(map(str, line_output)))
         except KeyError as ke:
-            print >>sys.stderr, "KeyError:", ke, line.strip()
+            print("KeyError:", ke, line.strip(), file=sys.stderr)
     
 
 if __name__ == '__main__':
