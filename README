@@ -1,0 +1,7 @@
+Create new version:
+
+```
+bumpversion patch
+python setup.py sdist upload -r pypi
+```
+
