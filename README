@@ -5,3 +5,8 @@ bumpversion patch
 python setup.py sdist upload -r pypi
 ```
 
+Create chromInfo.txt:
+
+```
+GENOME_NAME=GCF_000005845.2_ASM584v2_genomic; zcat ~/data/genomes/${GENOME_NAME}.fna.gz | python scripts/create_chrominfo.py  - > negspy/data/${GENOME_NAME}/chromInfo.txt
+```
