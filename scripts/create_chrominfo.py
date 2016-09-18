@@ -30,6 +30,7 @@ def main():
     #parser.add_argument('-u', '--useless', action='store_true', 
     #					 help='Another useless option')
     for record in fseq:
+        #print("record.id", record.id, len(record.seq), file=sys.stderr)
         print("{}\t{}".format(record.id, len(record.seq)))
 
     args = parser.parse_args()
