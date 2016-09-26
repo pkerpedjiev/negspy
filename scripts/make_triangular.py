@@ -1,9 +1,10 @@
 #!/usr/bin/python
+from __future__ import print_function
 
 import sys
 import argparse
 
-from itertools import tee, izip
+from itertools import tee
 
 def main():
     parser = argparse.ArgumentParser(description="""
@@ -27,10 +28,10 @@ def main():
             else:
                 out_parts = line_parts
 
-            print "\t".join(out_parts)
+            print("\t".join(out_parts))
             
         except KeyError as ke:
-            print >>sys.stderr, "KeyError:", ke, line.strip()
+            print("KeyError:", ke, line.strip(), file=sys.stderr)
     
 
 if __name__ == '__main__':
