@@ -49,7 +49,11 @@ def main():
                 if i not in translated:
                     line_output += [part]
 
-            print("\t".join(map(str, line_output)))
+            try:
+                print("\t".join(map(str, line_output)))
+            except BrokenPipeError:
+                # Output is probably being run through "head" or something similar
+                break
         except KeyError as ke:
             print("KeyError:", ke, line.strip(), file=sys.stderr)
     
