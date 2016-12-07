@@ -9,6 +9,12 @@ class ChromosomeInfo:
 
 chromInfo = {}
 
+def get_chromorder(assembly):
+    with open(op.join(op.dirname(__file__), 'data/{}/chromOrder.txt'.format(assembly)), 'r') as f:
+        chroms = [l.strip() for l in f.readlines()]
+    
+        return chroms
+
 def get_chrominfo(assembly):
     with open(op.join(op.dirname(__file__), 'data/{}/chromInfo.txt'.format(assembly)), 'r') as f:
         chrom_info = ChromosomeInfo(assembly)
