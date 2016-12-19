@@ -17,6 +17,9 @@ Or
 chr2 10 chr1 100
 249250631 100
 ```
+###
+
+Warning, GRCh37 is currently exactly the same hg19, except with chromosome names that match GRCh37 (e.g. "1" vs "chr1").
 
 ### API
 
