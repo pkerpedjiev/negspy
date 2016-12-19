@@ -6,6 +6,7 @@ class ChromosomeInfo:
         self.name = name
         self.total_length = 0
         self.cum_chrom_lengths = {}
+        self.chrom_lengths = {}
 
 chromInfo = {}
 
@@ -14,6 +15,12 @@ def get_chromorder(assembly):
         chroms = [l.strip() for l in f.readlines()]
     
         return chroms
+def get_chromsizes(assembly):
+    order = get_chromorder(assembly)
+    chrominfo = get_chrominfo(assembly)
+
+    sizes = [chrominfo.chrom_lengths[o] for o in order]
+    return sizes
 
 def get_chrominfo(assembly):
     with open(op.join(op.dirname(__file__), 'data/{}/chromInfo.txt'.format(assembly)), 'r') as f:
@@ -25,6 +32,7 @@ def get_chrominfo(assembly):
             totalLength += int(rec[1])
 
             chrom_info.cum_chrom_lengths[rec[0]] = totalLength - int(rec[1])
+            chrom_info.chrom_lengths[rec[0]] = int(rec[1])
 
         chrom_info.total_length = totalLength
     return chrom_info
