@@ -54,7 +54,7 @@ def main():
             line_output = []
             line_parts = line.strip().split()
             translated_positions = {}
-            translated_chroms = set()
+            translated_chroms = {}
 
             for translate_pair in [[int (y) for y in x.split(':')] for x in args.columns.split(',')]:
                 # go through the pairs of columns that need to be translated to genome position
@@ -66,12 +66,12 @@ def main():
 
                 # note that we've translated these columns and shouldn't include them in the output
                 translated_positions[translate_pair[1]-1] = genome_pos
-                translated_chroms.add(translate_pair[0]-1)
+                translated_chroms[translate_pair[0]-1] = chrom
 
             for i,part in enumerate(line_parts):
                 if i in translated_chroms:
                     # replace chromosome identifiers (e.g. 'chr1') with 'genome' to indicate the positions
-                    line_output += ['genome']
+                    line_output += ['genome({})'.format(chrom)]
                 elif i in translated_positions:
                     # this column used to contain a position so we need to replace it with a translated
                     # position
