@@ -18,13 +18,32 @@ def main():
     python chr_pos_to_genome_pos.py -t 1,2:3,4
 
     Convert chromosome,position pairs to genome_positions. Assumes that the
-    coordinates refer to the hg19 assembly.
+    coordinates refer to the hg19 assembly (unless otherwise specified).
+
+    Example:
+
+    2       NM_000014       chr12   -       9220303 9268825
+
+    -> python scripts/chr_pos_to_genome_pos.py -c 3:5,3:6
+
+    2       NM_000014       genome  -       2115405269      2115453791
+
+    --------------------------------
+
+    This also works with space-delimited fields:
+
+    chr5    56765,56766
+
+    ->python scripts/chr_pos_to_genome_pos.py -c 1:2
+
+    genome  881683465,881683466
 
 """)
 
     parser.add_argument('-a', '--assembly', default='hg19')
     parser.add_argument('-c', '--columns', default='1,2', 
-            help="Which columns to translate to genome positions. Column pairs should be separated by colons")
+            help="Which columns to translate to genome positions. "
+            "Column pairs should be 1-based and separated by colons")
 
     #parser.add_argument('-u', '--useless', action='store_true', 
     #                     help='Another useless option')
@@ -34,19 +53,31 @@ def main():
         try:
             line_output = []
             line_parts = line.strip().split()
-            translated = set()
-            for translate_pair in [[int (y) for y in x.split(',')] for x in args.columns.split(':')]:
+            translated_positions = {}
+            translated_chroms = set()
+
+            for translate_pair in [[int (y) for y in x.split(':')] for x in args.columns.split(',')]:
                 # go through the pairs of columns that need to be translated to genome position
-                chrom,pos = line_parts[translate_pair[0]-1], line_parts[translate_pair[1]-1]
-                genome_pos = nc.chr_pos_to_genome_pos( chrom, int(pos), args.assembly)
-                line_output += [genome_pos]
+                # assume that the position column is comma separated list of values (although it doesn't
+                # actually need to be)
+                chrom,poss = line_parts[translate_pair[0]-1], line_parts[translate_pair[1]-1].strip(",").split(',')
+                genome_pos = ",".join(map(str,[nc.chr_pos_to_genome_pos( chrom, int(pos), args.assembly) for pos in poss]))
+                #line_output += [genome_pos]
 
                 # note that we've translated these columns and shouldn't include them in the output
-                translated.add(translate_pair[0]-1)
-                translated.add(translate_pair[1]-1)
+                translated_positions[translate_pair[1]-1] = genome_pos
+                translated_chroms.add(translate_pair[0]-1)
 
             for i,part in enumerate(line_parts):
-                if i not in translated:
+                if i in translated_chroms:
+                    # replace chromosome identifiers (e.g. 'chr1') with 'genome' to indicate the positions
+                    line_output += ['genome']
+                elif i in translated_positions:
+                    # this column used to contain a position so we need to replace it with a translated
+                    # position
+                    line_output += [translated_positions[i]]
+                else:
+                    # if this column didn't contain a translated position output it as is
                     line_output += [part]
 
             try:
