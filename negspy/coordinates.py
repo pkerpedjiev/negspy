@@ -15,6 +15,7 @@ def get_chromorder(assembly):
         chroms = [l.strip() for l in f.readlines()]
     
         return chroms
+
 def get_chromsizes(assembly):
     order = get_chromorder(assembly)
     chrominfo = get_chrominfo(assembly)
