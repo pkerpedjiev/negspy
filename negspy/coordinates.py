@@ -1,5 +1,6 @@
 import csv
 import os.path as op
+import numpy as np
 
 class ChromosomeInfo:
     def __init__(self, name):
@@ -9,6 +10,7 @@ class ChromosomeInfo:
         self.chrom_lengths = {}
 
 chromInfo = {}
+cumChromSizes = {}
 
 def get_chromorder(assembly):
     with open(op.join(op.dirname(__file__), 'data/{}/chromOrder.txt'.format(assembly)), 'r') as f:
@@ -53,8 +55,9 @@ def chr_pos_to_genome_pos(chromosome, nucleotide, assembly='hg19'):
     :return: A single integer representing the position of the read if all the chromosomes were
              concatenated
     '''
-    if assembly not in chromInfo.keys():
-        chromInfo[assembly] = get_chrominfo(assembly)
+    if assembly not in cumChromSizes:
+        cumChromSizes[assembly] = dict(zip(get_chromorder(assembly),
+            np.cumsum([0] + get_chromsizes(assembly))[:-1]))
 
-    return chromInfo[assembly].cum_chrom_lengths[chromosome] + nucleotide
+    return cumChromSizes[assembly][chromosome] + nucleotide
 
