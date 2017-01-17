@@ -24,3 +24,23 @@ def test_chrom_sizes():
     assert(nc.get_chromsizes('hg19')[0] == 249250621)
     assert(nc.get_chromsizes('hg19')[1] == 243199373)
 
+
+def test_alt_chr_pos_to_chromorder():
+    print("chromSizes:",
+            nc.chr_pos_to_genome_pos('6', 0, 'b37'))
+
+    assert(nc.chr_pos_to_genome_pos('6', 0, 'b37') ==
+            1062541960)
+    assert(nc.chr_pos_to_genome_pos('7', 0, 'b37') ==
+            1233657027)
+    assert(nc.chr_pos_to_genome_pos('8', 0, 'b37') ==
+            1392795690)
+    
+def test_chrom_order():
+    assert(nc.get_chromorder('hg19')[0] == 'chr1')
+    assert(nc.get_chromorder('hg19')[-1] == 'chrM')
+
+def test_chrom_sizes():
+    assert(nc.get_chromsizes('hg19')[0] == 249250621)
+    assert(nc.get_chromsizes('hg19')[1] == 243199373)
+
