@@ -43,4 +43,3 @@ def test_chrom_order():
 def test_chrom_sizes():
     assert(nc.get_chromsizes('hg19')[0] == 249250621)
     assert(nc.get_chromsizes('hg19')[1] == 243199373)
-
