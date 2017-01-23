@@ -42,8 +42,7 @@ print(nc.get_chromorder('hg19')) # -> ['chr1', 'chr2', 'chr3', 'chr4', 'chr5', '
 ### Print the chromosome lengths
 
 ```python
-for chr in nc.get_chromorder('hg19'):
-    print chr + "\t" + str(nc.get_chrominfo('hg19').chrom_lengths[chr])
+python scripts/chrom_sizes.py hg19
 ```
 ...
 ```
