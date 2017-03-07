@@ -22,8 +22,7 @@ def main():
     args = parser.parse_args()
 
     for chr in nc.get_chromorder(args.assembly):
-        print chr + "\t" + str(nc.get_chrominfo('hg19').chrom_lengths[chr])
-
+        print(chr + "\t" + str(nc.get_chrominfo(args.assembly).chrom_lengths[chr]))
     
 
 if __name__ == '__main__':

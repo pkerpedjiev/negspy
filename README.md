@@ -72,3 +72,54 @@ chrX    155270560
 chrY    59373566
 chrM    16571
 ```
+
+## Adding new assemblies
+
+To add a new assembly, it's necessary to add a file called
+`negspy/data/${ASSEMBLY/chromInfo.txt` to the root repo directory. this file
+should contain chromosome names and sizes:
+
+
+```
+chr1	249250621
+chr2	243199373
+chr3	198022430
+...
+```
+
+One can also add `negspy/data/${ASSEMBLY}/chromSizes.txt` which defines how the
+chromosomes should be ordered if presented in a linear fashion. There's no
+correct ordering, but for many assemblies convention dictates having the
+numbered chromosomes first, followed by X, Y, M and the extra contigs. Example
+from hg19:
+
+```
+chr1
+chr2
+chr3
+chr4
+chr5
+chr6
+chr7
+chr8
+chr9
+chr10
+chr11
+chr12
+chr13
+chr14
+chr15
+chr16
+chr17
+chr18
+chr20
+chr19
+chr22
+chr21
+chrX
+chrY
+chrM
+...
+```
+
+
