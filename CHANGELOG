@@ -1,0 +1,4 @@
+v0.2.2
+
+- Changed mm9 chromSizes to use tabs instead of spaces
+- Added hg19 chromSizes
