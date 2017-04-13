@@ -2,6 +2,10 @@ from __future__ import print_function
 
 import negspy.coordinates as nc
 
+def test_test3chroms_chr_pos_genome_pos():
+    assert(nc.chr_pos_to_genome_pos('chr1', 100, 'test3chroms') == 100)
+    assert(nc.chr_pos_to_genome_pos('chr2', 100, 'test3chroms') == 1100)
+
 def test_dm3_chr_pos_genome_pos():
     assert(nc.chr_pos_to_genome_pos('chr2L', 100, 'dm3') == 100)
     assert(nc.chr_pos_to_genome_pos('chr2R', 100, 'dm3') == 23380516)
