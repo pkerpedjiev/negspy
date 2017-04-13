@@ -1,0 +1,15 @@
+chr2L
+chr2LHet
+chr2R
+chr2RHet
+chr3L
+chr3LHet
+chr3R
+chr3RHet
+chr4
+chrX
+chrXHet
+chrYHet
+chrU
+chrUextra
+chrM
