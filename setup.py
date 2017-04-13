@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='negspy',
-      version='0.2.3',
+      version='0.2.4',
       description='Python NGS tools',
       author='Peter Kerpedjiev',
       author_email='pkerpedjiev@gmail.com',
