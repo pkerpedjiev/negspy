@@ -60,4 +60,3 @@ def chr_pos_to_genome_pos(chromosome, nucleotide, assembly='hg19'):
             np.cumsum([0] + get_chromsizes(assembly))[:-1]))
 
     return cumChromSizes[assembly][chromosome] + nucleotide
-
