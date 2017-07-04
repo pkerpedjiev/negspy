@@ -1,0 +1,14 @@
+Create new version:
+
+```
+bumpversion patch
+python setup.py sdist upload -r pypi
+```
+
+Create chromInfo.txt:
+
+```
+GENOME_NAME=GCA_000001405.15_GRCh38_genomic; mkdir negspy/data/${GENOME_NAME}; zcat ~/data/genomes/${GENOME_NAME}.fna.gz | python scripts/create_chrominfo.py  - > negspy/data/${GENOME_NAME}/chromInfo.txt; git add negspy/data/${GENOME_NAME}/chromInfo.txt;
+GENOME_NAME=GCA_000001215.4_Release_6_plus_ISO1_MT_genomic; mkdir negspy/data/${GENOME_NAME}; zcat ~/data/genomes/${GENOME_NAME}.fna.gz | python scripts/create_chrominfo.py  - > negspy/data/${GENOME_NAME}/chromInfo.txt; git add negspy/data/${GENOME_NAME}/chromInfo.txt;
+GENOME_NAME=GCF_000005845.2_ASM584v2_genomic; zcat ~/data/genomes/${GENOME_NAME}.fna.gz | python scripts/create_chrominfo.py  - > negspy/data/${GENOME_NAME}/chromInfo.txt
+```
