@@ -1,4 +1,5 @@
 import csv
+import os
 import os.path as op
 import numpy as np
 
@@ -12,11 +13,35 @@ class ChromosomeInfo:
 chromInfo = {}
 cumChromSizes = {}
 
+def available_chromsizes():
+    '''
+    List the assemblies for which we have chromosome sizes.
+
+    All size files should be stored in data/{assembly}/chromInfo.txt
+    '''
+    available_assemblies = []
+
+    for assembly in os.listdir(op.join(op.dirname(__file__), 'data/')):
+        if op.exists(op.join(op.dirname(__file__), 'data/', assembly, 'chromInfo.txt')):
+            available_assemblies += [assembly]
+
+    return available_assemblies
+
 def get_chromorder(assembly):
-    with open(op.join(op.dirname(__file__), 'data/{}/chromOrder.txt'.format(assembly)), 'r') as f:
-        chroms = [l.strip() for l in f.readlines()]
-    
-        return chroms
+    chromorder_filename = op.join(op.dirname(__file__), 'data/{}/chromOrder.txt'.format(assembly))
+    chrominfo_filename = op.join(op.dirname(__file__), 'data/{}/chromInfo.txt'.format(assembly))
+
+    if op.exists(chromorder_filename):
+        with open(chromorder_filename, 'r') as f:
+            chroms = [l.strip() for l in f.readlines()]
+        
+            return chroms
+    else:
+        with open(chrominfo_filename, 'r') as f:
+            chroms = [l.strip().split()[0] for l in f.readlines()]
+        
+            return chroms
+
 
 def get_chromsizes(assembly):
     order = get_chromorder(assembly)

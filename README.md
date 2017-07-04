@@ -30,6 +30,14 @@ import negspy.coordinates as nc
 print(nc.chr_pos_to_genome_pos('chr1', 1000, 'hg19')) # -> 1000
 ```
 
+### List available chromsizes
+
+```
+>>> import negspy.coordinates as nc
+>>> nc.available_chromsizes()
+['b37', 'dm3', 'dm6', 'GCA_000001215.4_Release_6_plus_ISO1_MT_genomic', 'GCA_000001405.15_GRCh38_genomic', 'GCF_000005845.2_ASM584v2_genomic', 'grch37', 'grch37-lite', 'hg19', 'hg19_chr1', 'hg38', 'mm10', 'mm9', 'test', 'test3chroms']
+```
+
 ### Chromosome Ordering
 
 

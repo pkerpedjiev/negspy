@@ -25,6 +25,7 @@ def test_chr_pos_to_chromorder():
     
 def test_chrom_order():
     assert(nc.get_chromorder('hg19')[0] == 'chr1')
+    assert(nc.get_chromorder('mm10')[0] == 'chr1')
     #assert(nc.get_chromorder('hg19')[-1] == 'chrM')
 
 
@@ -40,3 +41,9 @@ def test_alt_chr_pos_to_chromorder():
             1233657027)
     assert(nc.chr_pos_to_genome_pos('8', 0, 'b37') ==
             1392795690)
+
+def test_available_chromsizes():
+    available_chromsizes = nc.available_chromsizes()
+
+    assert('hg19' in available_chromsizes)
+    assert('hg1' not in available_chromsizes)
