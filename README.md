@@ -84,7 +84,7 @@ chrM    16571
 ## Adding new assemblies
 
 To add a new assembly, it's necessary to add a file called
-`negspy/data/${ASSEMBLY/chromInfo.txt` to the root repo directory. this file
+`negspy/data/${ASSEMBLY}/chromInfo.txt` to the root repo directory. this file
 should contain chromosome names and sizes:
 
 
