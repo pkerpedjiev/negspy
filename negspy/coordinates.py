@@ -27,21 +27,25 @@ def available_chromsizes():
 
     return available_assemblies
 
+def get_chromorder_from_file(filename):
+    with open(filename, 'r') as f:
+        chroms = [l.strip().split()[0] for l in f.readlines()]
+    
+        return chroms
+
 def get_chromorder(assembly):
-    chromorder_filename = op.join(op.dirname(__file__), 'data/{}/chromOrder.txt'.format(assembly))
     chrominfo_filename = op.join(op.dirname(__file__), 'data/{}/chromInfo.txt'.format(assembly))
 
-    if op.exists(chromorder_filename):
-        with open(chromorder_filename, 'r') as f:
-            chroms = [l.strip() for l in f.readlines()]
-        
-            return chroms
-    else:
-        with open(chrominfo_filename, 'r') as f:
-            chroms = [l.strip().split()[0] for l in f.readlines()]
-        
-            return chroms
+    return get_chromorder_from_file(chrominfo_filename)
 
+
+def get_chromsizes_from_file(filename):
+    order = get_chromorder_from_file(filename)
+    chrominfo = get_chrominfo_from_file(filename)
+
+    sizes = [chrominfo.chrom_lengths[o] for o in order]
+
+    return sizes
 
 def get_chromsizes(assembly):
     order = get_chromorder(assembly)
@@ -50,9 +54,9 @@ def get_chromsizes(assembly):
     sizes = [chrominfo.chrom_lengths[o] for o in order]
     return sizes
 
-def get_chrominfo(assembly):
-    with open(op.join(op.dirname(__file__), 'data/{}/chromInfo.txt'.format(assembly)), 'r') as f:
-        chrom_info = ChromosomeInfo(assembly)
+def get_chrominfo_from_file(filename, assembly = None):
+    with open(filename, 'r') as f:
+        chrom_info = ChromosomeInfo(assembly if assembly is not None else filename)
         reader = csv.reader(f, delimiter='\t')
         totalLength = 0
 
@@ -64,6 +68,11 @@ def get_chrominfo(assembly):
 
         chrom_info.total_length = totalLength
     return chrom_info
+
+def get_chrominfo(assembly):
+    filename = op.join(op.dirname(__file__), 'data/{}/chromInfo.txt'.format(assembly))
+
+    return get_chrominfo_from_file(filename, assembly=assembly)
 
 def chr_pos_to_genome_pos(chromosome, nucleotide, assembly='hg19'):
     '''
