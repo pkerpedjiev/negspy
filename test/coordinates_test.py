@@ -47,3 +47,10 @@ def test_available_chromsizes():
 
     assert('hg19' in available_chromsizes)
     assert('hg1' not in available_chromsizes)
+
+def test_chrom_info_from_chromsizes():
+    chromsizes_file='negspy/data/hg19/chromInfo.txt'
+
+    chrom_info = nc.get_chrominfo_from_file(chromsizes_file)
+    assert(chrom_info.chrom_order[0] == 'chr1')
+    assert(chrom_info.chrom_order[-1] == 'chr18_gl000207_random')

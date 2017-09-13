@@ -9,6 +9,7 @@ class ChromosomeInfo:
         self.total_length = 0
         self.cum_chrom_lengths = {}
         self.chrom_lengths = {}
+        self.chrom_order = []
 
 chromInfo = {}
 cumChromSizes = {}
@@ -65,6 +66,7 @@ def get_chrominfo_from_file(filename, assembly = None):
 
             chrom_info.cum_chrom_lengths[rec[0]] = totalLength - int(rec[1])
             chrom_info.chrom_lengths[rec[0]] = int(rec[1])
+            chrom_info.chrom_order += [rec[0]]
 
         chrom_info.total_length = totalLength
     return chrom_info
