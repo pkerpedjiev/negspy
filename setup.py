@@ -8,6 +8,6 @@ setup(name='negspy',
       url='',
       packages=['negspy'],
       package_data={'negspy': ['data/*/chromInfo.txt', 'data/*/chromOrder.txt']},
-      scripts=['scripts/chr_pos_to_genome_pos.py', 'scripts/make_triangular.py']
+      scripts=['scripts/chr_pos_to_genome_pos.py', 'scripts/make_triangular.py', 'scripts/create_chrominfo.py']
 
      )
