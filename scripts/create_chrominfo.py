@@ -23,7 +23,7 @@ def main():
     elif args.fasta_file[-3:] == ".gz":
         f = gzip.open(args.fasta_file, 'r')
     else:
-        f = open(args.fasta_file, 'r', encoding='utf-8')
+        f = open(args.fasta_file, 'rb')
 
     #fseq = bsio.parse(f, 'fasta')
 
