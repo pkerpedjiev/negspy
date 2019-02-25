@@ -76,23 +76,19 @@ def get_chrominfo(assembly):
 
     return get_chrominfo_from_file(filename, assembly=assembly)
 
-def chr_pos_to_genome_pos(chromosome, nucleotide, assembly='hg19'):
+def chr_pos_to_genome_pos(chromosome, nucleotide, chrom_info):
     '''
     Convert chromsome / nucleotide coordinates to genome coordinates.
 
     Example: chr1:10 -> 10
-    Example: chr2:10 -> 247,249,729 
+    Example: chr2:10 -> 247,249,729
 
     Where the length of chromosome 1 is 247,249,719.
 
     :param chromosome: The name of a chromosome (i.e. chr1)
     :param nucleotide: The nucleotide number within the chromosome
-    :param chromInfo: The lengths of all the chromosomes in the genome assembly
+    :param chrom_info: The lengths of all the chromosomes in the genome assembly
     :return: A single integer representing the position of the read if all the chromosomes were
              concatenated
     '''
-    if assembly not in cumChromSizes:
-        cumChromSizes[assembly] = dict(zip(get_chromorder(assembly),
-            np.cumsum([0] + get_chromsizes(assembly))[:-1]))
-
-    return cumChromSizes[assembly][chromosome] + nucleotide
+    return chrom_info.cum_chrom_lengths[chromosome] + nucleotide
