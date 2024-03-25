@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='negspy',
-      version='0.3.0',
+      version='0.3.1',
       description='Python NGS tools',
       author='Peter Kerpedjiev',
       author_email='pkerpedjiev@gmail.com',
