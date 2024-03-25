@@ -1,7 +1,7 @@
 import csv
 import os
 import os.path as op
-import numpy as np
+from smart_open import open
 
 class ChromosomeInfo:
     def __init__(self, name):
