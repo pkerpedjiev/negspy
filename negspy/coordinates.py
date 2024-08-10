@@ -29,10 +29,19 @@ def available_chromsizes():
     return available_assemblies
 
 def get_chromorder_from_file(filename):
-    with open(filename, 'r') as f:
-        chroms = [l.strip().split()[0] for l in f.readlines()]
-    
-        return chroms
+    if isinstance(filename, str):
+        f = open(filename, 'r')
+
+        text_data = f.read()
+    else:
+        f = filename
+        
+        binary_data = f.read()
+        text_data = binary_data.decode("utf-8")
+
+    chroms = [l.strip().split()[0] for l in text_data.split('\n') if l.strip()]
+
+    return chroms
 
 def get_chromorder(assembly):
     chrominfo_filename = op.join(op.dirname(__file__), 'data/{}/chromInfo.txt'.format(assembly))
@@ -56,19 +65,27 @@ def get_chromsizes(assembly):
     return sizes
 
 def get_chrominfo_from_file(filename, assembly = None):
-    with open(filename, 'r') as f:
-        chrom_info = ChromosomeInfo(assembly if assembly is not None else filename)
-        reader = csv.reader(f, delimiter='\t')
-        totalLength = 0
+    if isinstance(filename, str):
+        f = open(filename, 'r')
 
-        for rec in reader:
-            totalLength += int(rec[1])
+        text_data = f.read()
+    else:
+        f = filename
+        
+        binary_data = f.read()
+        text_data = binary_data.decode("utf-8")
 
-            chrom_info.cum_chrom_lengths[rec[0]] = totalLength - int(rec[1])
-            chrom_info.chrom_lengths[rec[0]] = int(rec[1])
-            chrom_info.chrom_order += [rec[0]]
+    chrom_info = ChromosomeInfo(assembly if assembly is not None else filename)
+    totalLength = 0
 
-        chrom_info.total_length = totalLength
+    for rec in [l.strip() for l in text_data.split('\n') if l.strip()]:
+        totalLength += int(rec[1])
+
+        chrom_info.cum_chrom_lengths[rec[0]] = totalLength - int(rec[1])
+        chrom_info.chrom_lengths[rec[0]] = int(rec[1])
+        chrom_info.chrom_order += [rec[0]]
+
+    chrom_info.total_length = totalLength
     return chrom_info
 
 def get_chrominfo(assembly):
