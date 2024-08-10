@@ -36,10 +36,11 @@ def get_chromorder_from_file(filename):
     else:
         f = filename
         
+        f.seek(0)
         binary_data = f.read()
         text_data = binary_data.decode("utf-8")
 
-    chroms = [l.strip().split()[0] for l in text_data.split('\n') if l.strip()]
+    chroms = [l.strip().split('\t')[0] for l in text_data.split('\n') if l.strip()]
 
     return chroms
 
@@ -72,13 +73,14 @@ def get_chrominfo_from_file(filename, assembly = None):
     else:
         f = filename
         
+        f.seek(0)
         binary_data = f.read()
         text_data = binary_data.decode("utf-8")
 
     chrom_info = ChromosomeInfo(assembly if assembly is not None else filename)
     totalLength = 0
 
-    for rec in [l.strip() for l in text_data.split('\n') if l.strip()]:
+    for rec in [l.strip().split('\t') for l in text_data.split('\n') if l.strip()]:
         totalLength += int(rec[1])
 
         chrom_info.cum_chrom_lengths[rec[0]] = totalLength - int(rec[1])
