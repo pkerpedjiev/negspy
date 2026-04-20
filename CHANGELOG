@@ -1,3 +1,128 @@
+v0.3.2
+
+- Add GitHub workflow for automatic PyPI publishing
+
+v0.3.1
+
+- More fixes from file-like objects
+- Read from file-like object
+
+v0.3.0
+
+- Use smart_open instead of regular open
+
+v0.2.24
+
+- Added b38
+- Replace spaces with tabs
+- Reordered hg18/chromInfo.txt
+
+v0.2.23
+
+- Added mm9b assembly
+- Updated the chromorder for ce11 to have IV before V
+
+v0.2.22
+
+- Reordered the galGal6 chroms
+
+v0.2.21
+
+- Added galGal6
+- Added ce11 chromInfo
+- Updates to chr_pos_to_genome_pos to allow setting a new chromosome
+
+v0.2.20
+
+- Added chromInfo_no_alternate.txt
+- Renamed hs37d5 chromnames
+- Added three more chromInfo files
+- Added hs37d5
+- Added rheMac8 chromsizes
+- Added gorilla chromInfo
+- Added galGal5 and panTro5
+- Added sacCer3 chromInfo
+
+v0.2.19
+
+- resort dm6 for better appearance in Hi-C. Keep chrUn and _random scaffolds after 2,3,4,X,Y,M
+- Added danRer10 chromInfo
+- Load regular files as binary
+- Added create_chrominfo.py to setup
+- Read gzip files in create_chrominfo.py
+- Added a chrom_order field to chrom_info
+
+v0.2.18
+
+- Rearranged mm10's chromosome order
+
+v0.2.17
+
+- Added versions of the chromsizes and order functions that load data from a file rather than by assembly identifier
+
+v0.2.16
+
+- Switched chromosomes 10 and 11 in hg38
+- Use setuptools instead of disttools
+
+v0.2.15
+
+- Slightly reorderd grch37 chromosomes
+
+v0.2.14
+
+- Added a tab to grch37-lite chromInfo.txt
+
+v0.2.13
+
+- Removed the hg19 chromOrder (it's implicit)
+
+v0.2.12
+
+- Reversed chromosome 20 and 19
+
+v0.2.11
+
+- Moved chrM up in hg19
+
+v0.2.10
+
+- Added back the non-core contigs
+- Reordered the chromosomes in hg38
+
+v0.2.9
+
+- Added README
+
+v0.2.8
+
+- Merged with remote branch
+
+v0.2.7
+
+- Moved README to COMMANDS
+- Added a function to list chromosome sizes
+- Added GRCh37-lite chromInfo
+
+v0.2.6
+
+- Reordered the b37 chromosomes
+- Added requirements.txt
+- Added python 3.4 to travis
+- Added .travis.yml
+
+v0.2.5
+
+- Added test3chroms
+
+v0.2.4
+
+- Added dm3 assembly
+
+v0.2.3
+
+- Added tabs to mm9 chromSizes and added hg19 chromSizes
+
 v0.2.2
 
 - Changed mm9 chromSizes to use tabs instead of spaces
